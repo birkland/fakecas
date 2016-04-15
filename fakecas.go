@@ -3,12 +3,13 @@ package main
 import (
 	"flag"
 	"fmt"
+	"os"
+
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/engine/standard"
 	mw "github.com/labstack/echo/middleware"
 	"github.com/rs/cors"
 	"gopkg.in/mgo.v2"
-	"os"
 )
 
 var (
@@ -23,7 +24,7 @@ var (
 func main() {
 	flag.Parse()
 	e := echo.New()
-	e.Use(mw.LoggerFromConfig(mw.LoggerConfig{
+	e.Use(mw.LoggerWithConfig(mw.LoggerConfig{
 		Format: "${time_rfc3339} ${method} ${uri} ${status} ${response_time} ${response_size}\n",
 		Output: os.Stdout,
 	}))
